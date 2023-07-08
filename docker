@@ -1,0 +1,12 @@
+FROM  centos:latest
+
+RUN yum install -y httpd \
+ zip\
+ unzip
+ADD https://github.com/Raviragav/CI-CD-Pipelines-using-Kubernetes/blob/main/codes.zip /var/www/html/
+WORKDIR /var/www/html/
+RUN unzip codes.zip
+RUN cp -rvf codes/* .
+RUN rm -rf codes codes.zip
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+EXPOSE 80 22
